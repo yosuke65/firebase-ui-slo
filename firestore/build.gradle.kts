@@ -45,6 +45,19 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+
+        multipleVariants {
+            withSourcesJar()
+            withJavadocJar()
+            allVariants()
+        }
+    }
 }
 
 dependencies {
@@ -77,7 +90,7 @@ afterEvaluate {
             register<MavenPublication>("release") {
                 groupId = "com.github.yosuke65"
                 artifactId = "firebase-ui-slo"
-                version = "0.0.6"
+                version = "0.0.7"
 
                 afterEvaluate {
                     from(components["release"])
