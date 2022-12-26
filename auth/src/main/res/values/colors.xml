@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="fui_background">#FF121212</color>
+    <color name="fui_primary">#FF7A80EB</color>
+    <color name="fui_on_primary">#FFF9FAF6</color>
+    <color name="fui_surface">#FF272727</color>
     <color name="fui_transparent">#00000000</color>
 
     <color name="fui_bgGoogle">#ffffff</color>

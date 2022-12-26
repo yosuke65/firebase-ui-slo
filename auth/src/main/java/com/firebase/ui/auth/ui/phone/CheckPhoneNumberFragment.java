@@ -92,7 +92,7 @@ public class CheckPhoneNumberFragment extends FragmentBase implements View.OnCli
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && getFlowParams().enableHints) {
             mPhoneEditText.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
         }
-        requireActivity().setTitle(getString(R.string.fui_verify_phone_number_title));
+        requireActivity().setTitle(getString(R.string.fui_slo_app_title));
 
         ImeHelper.setImeOnDoneListener(mPhoneEditText, () -> onNext());
         mSubmitButton.setOnClickListener(this);

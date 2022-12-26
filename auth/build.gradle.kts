@@ -1,8 +1,10 @@
 import com.android.build.gradle.internal.dsl.TestOptions
 
 plugins {
-  id("com.android.library")
-  id("com.vanniktech.maven.publish")
+    id("com.android.library")
+    id("maven-publish")
+//  id("com.vanniktech.maven.publish")
+
 }
 
 android {
@@ -10,7 +12,7 @@ android {
 
     defaultConfig {
         minSdk = Config.SdkVersions.min
-        targetSdk =Config.SdkVersions.target
+        targetSdk = Config.SdkVersions.target
 
         buildConfigField("String", "VERSION_NAME", "\"${Config.version}\"")
 
@@ -24,8 +26,8 @@ android {
             consumerProguardFiles("auth-proguard.pro")
         }
     }
-        
-    compileOptions {    
+
+    compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -33,21 +35,21 @@ android {
     lint {
         // Common lint options across all modules
         disable += mutableSetOf(
-            "IconExpectedSize",
-            "InvalidPackage", // Firestore uses GRPC which makes lint mad
-            "NewerVersionAvailable", "GradleDependency", // For reproducible builds
-            "SelectableText", "SyntheticAccessor" // We almost never care about this
+                "IconExpectedSize",
+                "InvalidPackage", // Firestore uses GRPC which makes lint mad
+                "NewerVersionAvailable", "GradleDependency", // For reproducible builds
+                "SelectableText", "SyntheticAccessor" // We almost never care about this
         )
 
         // Module specific
         disable += mutableSetOf(
-            "UnusedQuantity",
-            "UnknownNullness",  // TODO fix in future PR
-            "TypographyQuotes", // Straight versus directional quotes
-            "DuplicateStrings",
-            "LocaleFolder",
-            "IconLocation",
-            "VectorPath"
+                "UnusedQuantity",
+                "UnknownNullness",  // TODO fix in future PR
+                "TypographyQuotes", // Straight versus directional quotes
+                "DuplicateStrings",
+                "LocaleFolder",
+                "IconLocation",
+                "VectorPath"
         )
 
         checkAllWarnings = true
@@ -92,4 +94,20 @@ dependencies {
     testImplementation(Config.Libs.Provider.facebook)
 
     debugImplementation(project(":internal:lintchecks"))
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            register<MavenPublication>("release") {
+                groupId = "com.github.yosuke65"
+                artifactId = "firebase-ui-slo"
+                version = "0.0.1"
+
+                afterEvaluate {
+                    from(components["release"])
+                }
+            }
+        }
+    }
 }

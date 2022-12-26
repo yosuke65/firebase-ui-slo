@@ -116,6 +116,7 @@
 
 
     <!-- Phone number auth -->
+    <string name="fui_slo_app_title" translatable="false">Slo</string>
     <string name="fui_verify_phone_number_title" translation_description="Phone number entry form title">Enter your phone number</string>
     <string name="fui_invalid_phone_number" translation_description="Inline error when phone number entered is invalid">Enter a valid phone number</string>
     <string name="fui_enter_confirmation_code" translation_description="Phone number verification code entry form title">Enter the 6-digit code we sent to</string>

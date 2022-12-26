@@ -140,10 +140,20 @@
 
     <style name="FirebaseUI.TextInputLayout.PhoneField">
         <item name="android:hint">@string/fui_phone_hint</item>
+        <item name="boxStrokeColor">@color/fui_primary</item>
+        <item name="hintTextColor">@color/fui_on_primary</item>
+        <item name= "android:textColorHint">@color/fui_on_primary</item>
+        <item name="placeholderTextColor">@color/fui_on_primary</item>
+        <item name="boxBackgroundColor">@color/fui_surface</item>
     </style>
 
     <style name="FirebaseUI.TextInputLayout.CountryField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:hint">@string/fui_country_hint</item>
+        <item name="boxStrokeColor">@color/fui_primary</item>
+        <item name="hintTextColor">@color/fui_on_primary</item>
+        <item name= "android:textColorHint">@color/fui_on_primary</item>
+        <item name="placeholderTextColor">@color/fui_on_primary</item>
+        <item name="boxBackgroundColor">@color/fui_surface</item>
     </style>
 
     <style name="FirebaseUI.TextInputLayout.NameField">

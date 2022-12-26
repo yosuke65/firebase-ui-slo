@@ -19,6 +19,8 @@ package com.firebase.ui.auth.ui.phone;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextUtils;
@@ -43,8 +45,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.ListPopupWindow;
+import androidx.core.content.res.ResourcesCompat;
 
 public final class CountryListSpinner extends TextInputEditText implements View.OnClickListener {
 
@@ -76,6 +81,9 @@ public final class CountryListSpinner extends TextInputEditText implements View.
                 R.layout.fui_dgts_country_row,
                 android.R.id.text1);
         mListPopupWindow = new ListPopupWindow(context, null, R.attr.listPopupWindowStyle);
+
+        int bg =   ResourcesCompat.getColor(getResources(), R.color.fui_surface, null);
+        mListPopupWindow.setBackgroundDrawable(new ColorDrawable(bg));
         mListPopupWindow.setModal(true);
 
         // Prevent the keyboard from showing
@@ -118,7 +126,6 @@ public final class CountryListSpinner extends TextInputEditText implements View.
             List<CountryInfo> countries = getCountriesToDisplayInSpinner(params);
             setCountriesToDisplay(countries);
             setDefaultCountryForSpinner(countries);
-
             mListPopupWindow.setAnchorView(anchorView);
             mListPopupWindow.setAdapter(mCountryListAdapter);
         }
