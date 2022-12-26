@@ -100,4 +100,5 @@ dependencies {
     testImplementation(Config.Libs.Misc.leakCanaryNoop)
 }
 
-apply(plugin = "com.google.gms.google-services")
+//Comment out before publishing to jitpack
+//apply(plugin = "com.google.gms.google-services")
