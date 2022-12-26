@@ -11,7 +11,7 @@ buildscript {
         classpath(Config.Plugins.android)
         classpath(Config.Plugins.kotlin)
         classpath(Config.Plugins.google)
-//        classpath(Config.Plugins.mavenPublish)
+        classpath(Config.Plugins.mavenPublish)
         classpath(Config.Plugins.buildInfo)
     }
 }

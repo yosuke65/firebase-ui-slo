@@ -1,5 +1,6 @@
 plugins {
   id("com.android.library")
+    id("maven-publish")
 //  id("com.vanniktech.maven.publish")
 }
 
@@ -48,4 +49,20 @@ dependencies {
     api(Config.Libs.Androidx.lifecycleViewModel)
     implementation(Config.Libs.Androidx.annotations)
     annotationProcessor(Config.Libs.Androidx.lifecycleCompiler)
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            register<MavenPublication>("release") {
+                groupId = "com.github.yosuke65"
+                artifactId = "firebase-ui-slo"
+                version = "0.0.1"
+
+                afterEvaluate {
+                    from(components["release"])
+                }
+            }
+        }
+    }
 }
