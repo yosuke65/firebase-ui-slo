@@ -78,4 +78,4 @@ dependencies {
     implementation(Config.Libs.Androidx.lifecycleExtensions)
 }
 
-apply(plugin = "com.google.gms.google-services")
+//apply(plugin = "com.google.gms.google-services")
