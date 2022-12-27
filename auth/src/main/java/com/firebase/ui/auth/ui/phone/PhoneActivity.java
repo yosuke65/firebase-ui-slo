@@ -148,7 +148,7 @@ public class PhoneActivity extends AppCompatBase {
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack();
         } else {
-            super.onBackPressed();
+//            super.onBackPressed();
         }
     }
 

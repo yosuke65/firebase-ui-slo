@@ -69,7 +69,7 @@ dependencies {
 //            register<MavenPublication>("release") {
 //                groupId = "com.github.yosuke65"
 //                artifactId = "firebase-ui-slo"
-//                version = "1.0.1"
+//                version = "1.0.2"
 //
 //                afterEvaluate {
 //                    from(components["release"])
