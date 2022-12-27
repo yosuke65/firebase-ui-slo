@@ -115,7 +115,7 @@ afterEvaluate {
             register<MavenPublication>("release") {
                 groupId = "com.github.yosuke65"
                 artifactId = "firebase-ui-slo"
-                version = "0.0.9"
+                version = "1.0.1"
 
                 afterEvaluate {
                     from(components["release"])
