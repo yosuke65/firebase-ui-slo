@@ -17,12 +17,16 @@ package com.firebase.ui.auth.ui.phone;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -35,12 +39,14 @@ import com.firebase.ui.auth.util.ExtraConstants;
 import com.firebase.ui.auth.util.data.PrivacyDisclosureUtils;
 import com.firebase.ui.auth.util.ui.BucketedTextChangeListener;
 import com.firebase.ui.auth.viewmodel.phone.PhoneProviderResponseHandler;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -49,7 +55,7 @@ import androidx.lifecycle.ViewModelProvider;
  * Display confirmation code to verify phone numbers input in {@link CheckPhoneNumberFragment}
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-public class SubmitConfirmationCodeFragment extends FragmentBase {
+public class SubmitConfirmationCodeFragment extends FragmentBase implements PhoneNumberVerificationCallback {
 
     public static final String TAG = "SubmitConfirmationCodeFragment";
 
@@ -64,6 +70,7 @@ public class SubmitConfirmationCodeFragment extends FragmentBase {
     private PhoneNumberVerificationHandler mHandler;
     private String mPhoneNumber;
 
+    private ConstraintLayout mLayout;
     private ProgressBar mProgressBar;
     private TextView mPhoneTextView;
     private TextView mResendCodeTextView;
@@ -86,6 +93,7 @@ public class SubmitConfirmationCodeFragment extends FragmentBase {
         super.onCreate(savedInstanceState);
         mHandler = new ViewModelProvider(requireActivity())
                 .get(PhoneNumberVerificationHandler.class);
+        mHandler.setPhoneNumberVerificationCallback(this);
         mPhoneNumber = getArguments().getString(ExtraConstants.PHONE);
         if (savedInstanceState != null) {
             mMillisUntilFinished = savedInstanceState.getLong(EXTRA_MILLIS_UNTIL_FINISHED);
@@ -102,6 +110,7 @@ public class SubmitConfirmationCodeFragment extends FragmentBase {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        mLayout = view.findViewById(R.id.submit_confirmation_code_layout);
         mProgressBar = view.findViewById(R.id.top_progress_bar);
         mPhoneTextView = view.findViewById(R.id.edit_phone_number);
         mCountDownTextView = view.findViewById(R.id.ticker);
@@ -200,7 +209,8 @@ public class SubmitConfirmationCodeFragment extends FragmentBase {
 
     private void setupEditPhoneNumberTextView() {
         mPhoneTextView.setText(mPhoneNumber);
-        mPhoneTextView.setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
+        mPhoneTextView.setOnClickListener(v -> requireActivity().getSupportFragmentManager()
+                .popBackStack());
     }
 
     private void setupResendConfirmationCodeTextView() {
@@ -242,5 +252,23 @@ public class SubmitConfirmationCodeFragment extends FragmentBase {
     @Override
     public void hideProgress() {
         mProgressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onCodeSent() {
+        Resources res = getResources();
+        String text = String.format(res.getString(R.string.fui_snackbar_code_send_confirmation), mPhoneNumber);
+        Snackbar snackbar = Snackbar.make(
+                mLayout,
+                text,
+                Snackbar.LENGTH_LONG
+        );
+        View view = snackbar.getView();
+        FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view.getLayoutParams();
+        params.gravity = Gravity.TOP;
+        view.setLayoutParams(params);
+        TextView tv = view.findViewById(com.google.android.material.R.id.snackbar_text);
+        tv.setTextColor(ContextCompat.getColor(requireContext(), R.color.fui_primary));
+        snackbar.show();
     }
 }

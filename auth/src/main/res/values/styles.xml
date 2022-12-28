@@ -300,6 +300,9 @@
         <item name="android:visibility">invisible</item>
     </style>
 
+    <style name="FirebaseUI.CircleProgressBar" parent="Widget.MaterialComponents.CircularProgressIndicator">
+    </style>
+
     <style name="FirebaseUI.PrivacyFooter">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
