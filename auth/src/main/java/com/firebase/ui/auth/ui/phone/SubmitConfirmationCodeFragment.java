@@ -268,7 +268,27 @@ public class SubmitConfirmationCodeFragment extends FragmentBase implements Phon
         params.gravity = Gravity.TOP;
         view.setLayoutParams(params);
         TextView tv = view.findViewById(com.google.android.material.R.id.snackbar_text);
-        tv.setTextColor(ContextCompat.getColor(requireContext(), R.color.fui_primary));
+        tv.setTextColor(ContextCompat.getColor(requireContext(), R.color.fui_on_primary));
+        view.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.fui_primary));
+        snackbar.show();
+    }
+
+    @Override
+    public void onVerificationSuccess() {
+        Resources res = getResources();
+        String text = res.getString(R.string.fui_snackbar_verification_success);
+        Snackbar snackbar = Snackbar.make(
+                mLayout,
+                text,
+                Snackbar.LENGTH_LONG
+        );
+        View view = snackbar.getView();
+        FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view.getLayoutParams();
+        params.gravity = Gravity.TOP;
+        view.setLayoutParams(params);
+        TextView tv = view.findViewById(com.google.android.material.R.id.snackbar_text);
+        tv.setTextColor(ContextCompat.getColor(requireContext(), R.color.fui_on_primary));
+        view.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.fui_on_primary));
         snackbar.show();
     }
 }

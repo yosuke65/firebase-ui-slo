@@ -45,6 +45,9 @@ public class PhoneNumberVerificationHandler extends AuthViewModelBase<PhoneVerif
                 .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     @Override
                     public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
+                        if(mPhoneNumberVerificationCallback != null) {
+                            mPhoneNumberVerificationCallback.onVerificationSuccess();
+                        }
                         setResult(Resource.forSuccess(new PhoneVerification(
                                 number, credential, true)));
                     }
@@ -57,13 +60,13 @@ public class PhoneNumberVerificationHandler extends AuthViewModelBase<PhoneVerif
                     @Override
                     public void onCodeSent(@NonNull String verificationId,
                                            @NonNull PhoneAuthProvider.ForceResendingToken token) {
+                        if(mPhoneNumberVerificationCallback != null) {
+                            mPhoneNumberVerificationCallback.onCodeSent();
+                        }
                         mVerificationId = verificationId;
                         mForceResendingToken = token;
                         setResult(Resource.forFailure(
                                 new PhoneNumberVerificationRequiredException(number)));
-                        if(mPhoneNumberVerificationCallback != null) {
-                            mPhoneNumberVerificationCallback.onCodeSent();
-                        }
                     }
                 });
         if (force) {

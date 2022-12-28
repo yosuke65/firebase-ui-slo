@@ -7,45 +7,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<!--    <com.google.android.material.progressindicator.LinearProgressIndicator-->
-<!--        android:id="@+id/top_progress_bar"-->
-<!--        style="@style/FirebaseUI.TopProgressBar"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        tools:visibility="visible" />-->
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             style="@style/FirebaseUI.WrapperStyle"
-            android:layout_height="wrap_content">
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/header"
-                style="@style/FirebaseUI.Text.T08"
+
+            <LinearLayout
+                android:id="@+id/header_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/otp_field_layout"
+                >
+            <TextView
+                android:id="@+id/header"
+                style="@style/FirebaseUI.Text.T05"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="@string/fui_enter_confirmation_code"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/edit_phone_number" />
 
             <TextView
                 android:id="@+id/edit_phone_number"
-                style="@style/FirebaseUI.Text.T08"
+                style="@style/FirebaseUI.Text.T06"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/fui_primary"
+                android:gravity="center"
+                android:padding="20dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 app:layout_constraintTop_toBottomOf="@+id/header"
+                app:layout_constraintBottom_toTopOf="@+id/confirmation_code_layout"
                 tools:ignore="SelectableText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/otp_field_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/header_layout"
+                app:layout_constraintBottom_toTopOf="@+id/email_footer_tos_and_pp_text"
+                android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/confirmation_code_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/fui_field_padding_vert"
-                app:layout_constraintTop_toBottomOf="@+id/edit_phone_number">
+                app:layout_constraintTop_toBottomOf="@+id/edit_phone_number"
+                app:layout_constraintBottom_toTopOf="@+id/ticker">
 
                 <com.firebase.ui.auth.ui.phone.SpacedEditText
                     android:id="@+id/confirmation_code"
@@ -77,6 +93,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/confirmation_code_layout"
+                app:layout_constraintBottom_toTopOf="@+id/resend_code"
                 tools:text="Resend in 0:01" />
 
             <TextView
@@ -101,16 +118,17 @@
                 app:barrierDirection="bottom"
                 app:constraint_referenced_ids="ticker,resend_code" />
 
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/email_footer_tos_and_pp_text"
                 style="@style/FirebaseUI.PrivacyFooter"
                 android:gravity="center_horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/resend_barrier"
+                app:layout_constraintTop_toBottomOf="@+id/otp_field_layout"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
 
     <ProgressBar
         android:id="@+id/top_progress_bar"

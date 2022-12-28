@@ -33,6 +33,11 @@
         <item name="android:layout_marginRight">@dimen/fui_wrapper_padding_horiz</item>
     </style>
 
+    <style name="FirebaseUI.AppTitleText">
+        <item name="android:fontFamily">@font/playfair_display_bold</item>
+        <item name="android:text">SLO</item>
+    </style>
+
     <style name="FirebaseUI.Text">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -132,7 +137,7 @@
         <item name="android:inputType">textPassword</item>
     </style>
 
-    <style name="FirebaseUI.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox" />
+    <style name="FirebaseUI.TextInputLayout" />
 
     <style name="FirebaseUI.TextInputLayout.EmailField">
         <item name="android:hint">@string/fui_email_hint</item>
@@ -140,20 +145,20 @@
 
     <style name="FirebaseUI.TextInputLayout.PhoneField">
         <item name="android:hint">@string/fui_phone_hint</item>
-        <item name="boxStrokeColor">@color/fui_primary</item>
+        <item name="boxStrokeColor">@color/fui_text_input_stroke_color</item>
         <item name="hintTextColor">@color/fui_on_primary</item>
         <item name= "android:textColorHint">@color/fui_on_primary</item>
         <item name="placeholderTextColor">@color/fui_on_primary</item>
-        <item name="boxBackgroundColor">@color/fui_surface</item>
+        <item name="boxBackgroundColor">@color/fui_background</item>
     </style>
 
-    <style name="FirebaseUI.TextInputLayout.CountryField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="FirebaseUI.TextInputLayout.CountryField">
         <item name="android:hint">@string/fui_country_hint</item>
-        <item name="boxStrokeColor">@color/fui_primary</item>
+        <item name="boxStrokeColor">@color/fui_text_input_stroke_color</item>
         <item name="hintTextColor">@color/fui_on_primary</item>
         <item name= "android:textColorHint">@color/fui_on_primary</item>
         <item name="placeholderTextColor">@color/fui_on_primary</item>
-        <item name="boxBackgroundColor">@color/fui_surface</item>
+        <item name="boxBackgroundColor">@color/fui_background</item>
     </style>
 
     <style name="FirebaseUI.TextInputLayout.NameField">
